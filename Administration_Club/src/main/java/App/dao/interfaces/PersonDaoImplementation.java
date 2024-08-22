@@ -4,13 +4,13 @@
  */
 package App.dao.interfaces;
 
+import App.config.MYSQLConnection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import app.config.MYSQLConnection;
 import App.dao.interfaces.PersonDao;
 import App.dto.PersonDto;
 import App.model.Person;
-import Helper.Helper;
+import App.Helper.Helper;
 
 public class PersonDaoImplementation implements PersonDao {
 

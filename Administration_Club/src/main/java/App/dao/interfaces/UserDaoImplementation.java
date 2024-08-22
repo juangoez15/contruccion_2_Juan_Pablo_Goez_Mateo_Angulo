@@ -6,10 +6,10 @@ import java.sql.ResultSet;
 import App.config.MYSQLConnection;
 import App.dao.interfaces.UserDao;
 import App.dto.UserDto;
-import App.helpers.Helper;
+import App.Helper.Helper;
 import App.model.Person;
 import App.model.User;
-import Helper.Helper;
+import App.Helper.Helper;
 
 public class UserDaoImplementation implements UserDao {
 
