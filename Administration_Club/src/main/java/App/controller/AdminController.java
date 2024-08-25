@@ -8,8 +8,8 @@ import App.service.Service;
 import App.service.interfaces.AdminService;
 
 
-public class AdminController {
-    	private PersonValidator personValidator;
+public class AdminController implements ControllerInterface{
+	private PersonValidator personValidator;
 	private UserValidator userValidator;
 	private AdminService service;
 	private static final String MENU = "ingrese la opcion que desea \n 1.Registro de socio. \n 2. Historial de facturas \n 3. Promoción a VIP \n";
@@ -20,7 +20,7 @@ public class AdminController {
 		this.service = new Service();
 	}
 
-	
+	 
 	public void session() throws Exception {
 		boolean session = true;
 		while (session) {
