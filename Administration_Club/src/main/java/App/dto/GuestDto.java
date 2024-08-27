@@ -42,6 +42,10 @@ public class GuestDto {
     public void setStatus(boolean Status) {
         this.Status = Status;
     }
+
+    public PersonDto getPersonId() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
     
 }

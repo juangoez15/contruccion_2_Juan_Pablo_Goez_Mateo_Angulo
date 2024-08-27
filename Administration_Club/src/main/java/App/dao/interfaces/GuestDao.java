@@ -4,10 +4,17 @@
  */
 package App.dao.interfaces;
 
+import App.dto.GuestDto;
+import App.dto.PersonDto;
+
 /**
  *
  * @author ASUS
  */
 public interface GuestDao {
+
+    public boolean existsByPersonId(PersonDto personId);
+
+    public void createGuest(GuestDto guestDto);
     
 }

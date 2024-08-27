@@ -1,4 +1,4 @@
-package app.service.interfaces;
+package App.service.interfaces;
 
 import App.dto.UserDto;
 

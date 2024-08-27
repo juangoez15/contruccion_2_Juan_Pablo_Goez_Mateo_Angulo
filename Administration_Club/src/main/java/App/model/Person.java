@@ -2,10 +2,10 @@ package App.model;
 
 
 public class Person {
-    private long Id;
-    private long Identification_Card;
-    private String Name;
-    private long Celphone;
+        private long Id;
+        private long Identification_Card;
+        private String Name;
+        private long Celphone;
     
     public Person(){
         
