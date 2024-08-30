@@ -1,5 +1,7 @@
 package App.model;
 
+import App.dto.UserDto;
+
 
 public class Guest {
     private long Id;
@@ -41,6 +43,18 @@ public class Guest {
 
     public void setStatus(boolean Status) {
         this.Status = Status;
+    }
+
+    public String getName() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void setName(String name) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void setUSerId(UserDto userId) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     

@@ -1,9 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package App.dao.interfaces;
 
+ 
 import App.config.MYSQLConnection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,9 +8,9 @@ import App.dao.interfaces.PersonDao;
 import App.dto.PersonDto;
 import App.model.Person;
 import App.Helper.Helper;
-
+ 
 public class PersonDaoImplementation implements PersonDao {
-
+ 
     @Override
     public boolean existsByDocument(PersonDto personDto) throws Exception {
         String query = "SELECT 1 FROM PERSON WHERE DOCUMENT = ?";
@@ -25,7 +22,7 @@ public class PersonDaoImplementation implements PersonDao {
         preparedStatement.close();
         return exists;
     }
-
+ 
     @Override
     public void createPerson(PersonDto personDto) throws Exception {
         Person person = Helper.parse(personDto);
@@ -37,7 +34,7 @@ public class PersonDaoImplementation implements PersonDao {
         preparedStatement.execute();
         preparedStatement.close();
     }
-
+ 
     @Override
     public void deletePerson(PersonDto personDto) throws Exception {
         Person person = Helper.parse(personDto);
@@ -47,7 +44,7 @@ public class PersonDaoImplementation implements PersonDao {
         preparedStatement.execute();
         preparedStatement.close();
     }
-
+ 
     @Override
     public PersonDto findByDocument(PersonDto personDto) throws Exception {
         String query = "SELECT ID,NAME,DOCUMENT,CELLPHONE FROM PERSON WHERE DOCUMENT = ?";
@@ -68,5 +65,5 @@ public class PersonDaoImplementation implements PersonDao {
         preparedStatement.close();
         return null;
     }
-
+ 
 }

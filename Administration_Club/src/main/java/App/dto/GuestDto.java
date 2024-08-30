@@ -1,51 +1,39 @@
 package App.dto;
-
-
+ 
 public class GuestDto {
-    private long Id;
-    private UserDto UserId;
-    private PartnerDto PartnerId;
-    private boolean Status;
-    
-    public GuestDto(){
-        
-    }
-
+    private long id;
+    private String name;
+    private PartnerDto partnerId; // Este es el campo que necesitas
+ 
+    // Constructor
+    public GuestDto() {}
+ 
+    // Getters y Setters
     public long getId() {
-        return Id;
+        return id;
     }
-
-    public void setId(long Id) {
-        this.Id = Id;
+ 
+    public void setId(long id) {
+        this.id = id;
     }
-
-    public UserDto getUserId() {
-        return UserId;
+ 
+    public String getName() {
+        return name;
     }
-
-    public void setUserId(UserDto UserId) {
-        this.UserId = UserId;
+ 
+    public void setName(String name) {
+        this.name = name;
     }
 
     public PartnerDto getPartnerId() {
-        return PartnerId;
+        return partnerId;
     }
 
-    public void setPartnerId(PartnerDto PartnerId) {
-        this.PartnerId = PartnerId;
-    }
+    public void setPartnerId(PartnerDto partnerId) {
+        this.partnerId = partnerId;
+    }  
 
-    public boolean isStatus() {
-        return Status;
-    }
-
-    public void setStatus(boolean Status) {
-        this.Status = Status;
-    }
-
-    public PersonDto getPersonId() {
+    public UserDto getUserId() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
-    
 }

@@ -13,4 +13,6 @@ public interface UserDao {
     public boolean existsByUserName(UserDto userDto) throws Exception;
 
     public void createUser(UserDto userDto) throws Exception;
+    
+    public void createGuest(UserDto userDto) throws Exception;
 }

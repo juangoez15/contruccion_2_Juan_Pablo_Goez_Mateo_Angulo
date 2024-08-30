@@ -13,8 +13,8 @@ import App.dto.PersonDto;
  */
 public interface GuestDao {
 
-    public boolean existsByPersonId(PersonDto personId);
+    public boolean existsByPersonId(PersonDto personId)throws Exception;;
 
-    public void createGuest(GuestDto guestDto);
+    public void createGuest(GuestDto guestDto)throws Exception;;
     
 }

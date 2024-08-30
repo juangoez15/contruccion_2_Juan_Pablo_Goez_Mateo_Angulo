@@ -22,9 +22,9 @@ public class AdministrationClub {
 
             String rol = null; // Implementa el método de login que devuelva el rol del usuario
             loginController.login();
-
-            if (rol == null) {
-                mostrarMensajeError("Inicio de sesión fallido. Saliendo del sistema...");
+            mostrarMensajeError("Inicio de sesión fallido. Saliendo del sistema...");
+            /*if (rol == null) {
+                
                 return;
             }
 
@@ -60,7 +60,7 @@ public class AdministrationClub {
                     default ->
                         mostrarMensajeError("Opción no válida. Intente de nuevo.");
                 }
-            }
+            }*/
         } catch (Exception e) {
             mostrarMensajeError(MENSAJE_ERROR + e.getMessage());
         }
@@ -85,11 +85,6 @@ public class AdministrationClub {
                 OPTIONS_MENU_PRINCIPAL[0]);
     }
 
-    private static void gestionarPartner(String rol) {
-        // Crear un controlador de socios según el rol del usuario
-        PartnerController PartnerController = new PartnerController();
-        PartnerController.gestionar(rol);
-    }
 
     private static void gestionarGuest(String rol) {
         // Crear un controlador de invitados según el rol del usuario

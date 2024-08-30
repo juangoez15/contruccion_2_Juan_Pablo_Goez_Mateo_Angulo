@@ -24,8 +24,11 @@ public class LoginController implements ControllerInterface {
         this.userValidator = new UserValidator();
         this.service = (LoginService) new Service();
         ControllerInterface adminController = (ControllerInterface) new AdminController();
+        ControllerInterface partnerController = (ControllerInterface) new PartnerController();
         this.roles = new HashMap<String, ControllerInterface>();
         roles.put("admin", adminController);
+        roles.put("Socio", partnerController);
+
     }
 
     @Override
@@ -64,44 +67,22 @@ public class LoginController implements ControllerInterface {
         }
     }
 
-    /**
-     *
-     * @throws Exception
-     */
-    @Override
     public void login() throws Exception {
-        try {
-            // Solicitar el nombre de usuario
+           
             String username = JOptionPane.showInputDialog(null, "Ingrese el usuario:");
             userValidator.validUsername(username);
-
-            // Solicitar la contraseña
             String password = JOptionPane.showInputDialog(null, "Ingrese la contraseña:");
             userValidator.validPassword(password);
-
-            // Crear el objeto UserDto
             UserDto userDto = new UserDto();
             userDto.setUsername(username);
             userDto.setPassword(password);
-
-            // Intentar iniciar sesión
             this.service.login(userDto);
-
-            // Verificar el rol del usuario
             if (roles.get(userDto.getRol()) == null) {
                 throw new Exception("Rol inválido");
             }
-
-            // Iniciar la sesión según el rol
             roles.get(userDto.getRol()).session();
 
-        } catch (Exception e) {
-            // Mostrar un mensaje de error
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error de Inicio de Sesión", JOptionPane.ERROR_MESSAGE);
-            throw new Exception(e.getMessage());
-        }
-    }
-
+        } 
 }
 
 

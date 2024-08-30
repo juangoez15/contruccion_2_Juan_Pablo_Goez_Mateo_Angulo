@@ -62,4 +62,9 @@ public class UserDaoImplementation implements UserDao {
         preparedStatement.execute();
         preparedStatement.close();
     }
+
+    @Override
+    public void createGuest(UserDto userDto) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

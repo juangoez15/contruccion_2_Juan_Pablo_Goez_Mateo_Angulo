@@ -1,8 +1,10 @@
 package App.Helper;
 
+import App.dto.GuestDto;
 import App.dto.PartnerDto;
 import App.dto.PersonDto;
 import App.dto.UserDto;
+import App.model.Guest;
 import App.model.Partner;
 import App.model.Person;
 import App.model.User;
@@ -65,7 +67,27 @@ public abstract class Helper {
         return partner;
     }
 
+    public static GuestDto parse(Guest guest) {
+        GuestDto guestDto = new GuestDto();
+        guestDto.setId(guest.getId());
+        guestDto.setName(guest.getName());
+        guestDto.setPartnerId(guestDto.getPartnerId());
+        return guestDto;
+    }
+
+    public static Guest parse(GuestDto guestDto) {
+        Guest guest = new Guest();
+        guest.setId(guestDto.getId());
+        guest.setName(guestDto.getName());
+        guest.setUSerId(guestDto.getUserId());
+        return guest;
+    }
+
     public static User getUserId(long aLong) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public static Partner getPartnerId(long aLong) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
