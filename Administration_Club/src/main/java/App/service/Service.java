@@ -4,7 +4,6 @@ import App.dao.interfaces.DetalinvoiceDao;
 import App.dao.interfaces.GuestDao;
 import java.sql.Date;
 import java.sql.SQLException;
-
 import App.dao.interfaces.PersonDaoImplementation;
 import App.dao.interfaces.UserDaoImplementation;
 import App.dao.interfaces.InvoiceDao;
@@ -22,7 +21,7 @@ import App.service.interfaces.LoginService;
 import App.service.interfaces.LoginService;
 import java.util.List;
 
-public class Service implements AdminService, LoginService, PartnerService, GuestService{
+public class Service implements AdminService, LoginService, PartnerService{
 
     private UserDao userDao;
     private PersonDao personDao;

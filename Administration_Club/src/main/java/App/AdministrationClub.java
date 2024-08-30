@@ -85,13 +85,6 @@ public class AdministrationClub {
                 OPTIONS_MENU_PRINCIPAL[0]);
     }
 
-
-    private static void gestionarGuest(String rol) {
-        // Crear un controlador de invitados según el rol del usuario
-        GuestController GuestController = new GuestController();
-        GuestController.gestionar(rol);
-    }
-
     private static void facturacion() {
         AdminController adminController = new AdminController();
         adminController.facturacion();

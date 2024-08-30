@@ -70,7 +70,6 @@ public abstract class Helper {
     public static GuestDto parse(Guest guest) {
         GuestDto guestDto = new GuestDto();
         guestDto.setId(guest.getId());
-        guestDto.setName(guest.getName());
         guestDto.setPartnerId(guestDto.getPartnerId());
         return guestDto;
     }
@@ -78,17 +77,17 @@ public abstract class Helper {
     public static Guest parse(GuestDto guestDto) {
         Guest guest = new Guest();
         guest.setId(guestDto.getId());
-        guest.setName(guestDto.getName());
         guest.setUSerId(guestDto.getUserId());
         return guest;
     }
+
+
 
     public static User getUserId(long aLong) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    public static Partner getPartnerId(long aLong) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+  
+    
 
 }

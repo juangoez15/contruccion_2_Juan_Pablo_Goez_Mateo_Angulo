@@ -52,7 +52,6 @@ public class PartnerDto {
 
     public void setUserId(UserDto UserId) {
         this.UserId = UserId;
-    }
-    
+    } 
     
 }

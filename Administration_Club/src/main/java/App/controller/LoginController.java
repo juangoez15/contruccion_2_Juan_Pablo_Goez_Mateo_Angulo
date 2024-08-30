@@ -25,9 +25,11 @@ public class LoginController implements ControllerInterface {
         this.service = (LoginService) new Service();
         ControllerInterface adminController = (ControllerInterface) new AdminController();
         ControllerInterface partnerController = (ControllerInterface) new PartnerController();
+        ControllerInterface guestController = (ControllerInterface) new GuestController();
         this.roles = new HashMap<String, ControllerInterface>();
         roles.put("admin", adminController);
         roles.put("Socio", partnerController);
+        roles.put("Invitado", partnerController);
 
     }
 

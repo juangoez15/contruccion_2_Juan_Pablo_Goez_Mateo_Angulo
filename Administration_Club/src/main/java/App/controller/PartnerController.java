@@ -69,25 +69,49 @@ public class PartnerController implements ControllerInterface {
         }
     }
 private void createGuest() throws Exception {
-    String name = JOptionPane.showInputDialog(null, "Ingrese el nombre del invitado:");
-    personValidator.validName(name);
-    // Solicitar el ID del invitado
-    String idInput = JOptionPane.showInputDialog(null, "Ingrese el ID del invitado:");
-    long id = Long.parseLong(idInput);  // Agrega validación si es necesario
-    // Solicitar el ID del socio asociado al invitado
-    String partnerIdInput = JOptionPane.showInputDialog(null, "Ingrese el ID del socio asociado:");
-    long partnerId = Long.parseLong(partnerIdInput);  // Agrega validación si es necesario
-    // Crear el DTO de Guest (invitado)
-    GuestDto guestDto = new GuestDto();
-  //  guestDto.setId(id);
-    guestDto.setName(name);
-    guestDto.setId(partnerId);
-    // Llamar al servicio para crear el invitado
-    service.createGuest(guestDto);
+     // Solicitar el nombre del socio
+        String name = JOptionPane.showInputDialog(null, "Ingrese el nombre del invitado:");
+        personValidator.validName(name);
 
-    // Mostrar mensaje de éxito
-    JOptionPane.showMessageDialog(null, "¡Se ha creado el invitado exitosamente!");
-}
+        // Solicitar la cédula del socio
+        String idCardInput = JOptionPane.showInputDialog(null, "Ingrese la cédula del invitado:");
+        long identificationCard = personValidator.validDocument(idCardInput);
+
+        // Solicitar el nombre de usuario del socio
+        String username = JOptionPane.showInputDialog(null, "Ingrese el nombre de usuario del invitado:");
+        userValidator.validUsername(username);
+
+        // Solicitar la contraseña del socio
+        String password = JOptionPane.showInputDialog(null, "Ingrese la contraseña del invitado:");
+        userValidator.validPassword(password);
+
+        // Solicitar el número de celular del socio
+        String cellphoneInput = JOptionPane.showInputDialog(null, "Ingrese el número de celular del invitado:");
+        long cellphone = Long.parseLong(cellphoneInput);  // Agrega validación si es necesario
+
+        // Crear los DTOs (Data Transfer Objects)
+        PersonDto personDto = new PersonDto();
+        personDto.setName(name);
+        personDto.setIdentification_Card(identificationCard);
+        personDto.setCelphone(3501235896L);
+
+        UserDto userDto = new UserDto();
+        userDto.setPersonId(personDto);
+        userDto.setUsername(username);
+        userDto.setPassword(password);
+        userDto.setRol("Socio");
+
+        GuestDto guestDto = new GuestDto();
+        guestDto.setUserId(userDto);
+
+        // Llamar al servicio para crear el socio
+        service.createGuest(guestDto);
+
+        // Mostrar mensaje de éxito
+        JOptionPane.showMessageDialog(null, "¡Se ha creado el invitado exitosamente!");
+
+    
+    }
 
 
     private void manageFunds() {

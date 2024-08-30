@@ -24,7 +24,7 @@ public class GuestDaoImplementation implements GuestDao {
             Guest guest = new Guest();
             guest.setId(resultSet.getLong("ID"));
             guest.setName(resultSet.getString("NAME"));
-            guest.setPartnerId(Helper.getPartnerId(resultSet.getLong("PARTNERID")));
+            guest.setUserId(Helper.getUserId(resultSet.getLong("PARTNERID")));
 
             resultSet.close();
             preparedStatement.close();
@@ -60,7 +60,7 @@ public class GuestDaoImplementation implements GuestDao {
         String query = "INSERT INTO GUEST(NAME, PARTNERID, STATUS) VALUES (?, ?, ?)";
 
         PreparedStatement preparedStatement = MYSQLConnection.getConnection().prepareStatement(query);
-        preparedStatement.setString(1, guestDto.getName());
+        preparedStatement.setLong(1, guestDto.getUserId().getId());
         preparedStatement.setLong(2, guestDto.getId());
         preparedStatement.setBoolean(3, true); // Los invitados son creados como activos por defecto
 

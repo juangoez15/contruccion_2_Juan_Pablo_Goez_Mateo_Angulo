@@ -21,41 +21,24 @@ import java.sql.Date;
 public class PartnerDaoImplementation implements PartnerDao {
 
     public PartnerDto findByPersonId(PartnerDto partnerDto) throws Exception {
-
         String query = "SELECT ID, AMOUNT, TYPE, CREATIONDATE, USERID FROM PARTNER WHERE USERID = ?";
-
         PreparedStatement preparedStatement = MYSQLConnection.getConnection().prepareStatement(query);
-
         preparedStatement.setLong(1, partnerDto.getUserId().getId());
-
         ResultSet resultSet = preparedStatement.executeQuery();
-
         if (resultSet.next()) {
-
             Partner partner = new Partner();
-
             partner.setId(resultSet.getLong("ID"));
-
-            partner.setAmaunt(resultSet.getDouble("AMOUNT"));
-
-            partner.setType(resultSet.getBoolean("TYPE"));
-
-            partner.setCreation_date(resultSet.getDate("CREATIONDATE"));
-
             partner.setUserId(Helper.getUserId(resultSet.getLong("USERID")));
-
+            partner.setAmaunt(resultSet.getDouble("AMOUNT"));
+            partner.setType(resultSet.getBoolean("TYPE"));
+            partner.setCreation_date(resultSet.getDate("CREATIONDATE"));
+            
             resultSet.close();
-
             preparedStatement.close();
-
             return Helper.parse(partner);
-
         }
-
         resultSet.close();
-
         preparedStatement.close();
-
         return null;
 
     }
@@ -75,23 +58,14 @@ public class PartnerDaoImplementation implements PartnerDao {
     @Override
 
     public void createPartner(PartnerDto partnerDto) throws Exception {
-
         Partner partner = Helper.parse(partnerDto);
-
-        String query = "INSERT INTO PARTNER(AMOUNT, TYPE, CREATIONDATE, USERID) VALUES (?, ?, ?, ?)";
-
+        String query = "INSERT INTO PARTNER( USERID, AMOUNT, TYPE, CREATIONDATE) VALUES (?, ?, ?, ?)";
         PreparedStatement preparedStatement = MYSQLConnection.getConnection().prepareStatement(query);
-
-        preparedStatement.setDouble(1, partner.getAmaunt());
-
-        preparedStatement.setBoolean(2, partner.isType());
-
-        preparedStatement.setDate(3, new Date(System.currentTimeMillis()));
-
-        preparedStatement.setLong(4, partner.getUserId().getId());
-
+        preparedStatement.setLong(1, partner.getUserId().getId());
+        preparedStatement.setDouble(2, partner.getAmaunt());
+        preparedStatement.setBoolean(3, partner.isType());
+        preparedStatement.setDate(4, new Date(System.currentTimeMillis()));
         preparedStatement.execute();
-
         preparedStatement.close();
 
     }

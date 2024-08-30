@@ -2,8 +2,10 @@ package App.dto;
  
 public class GuestDto {
     private long id;
-    private String name;
-    private PartnerDto partnerId; // Este es el campo que necesitas
+    private UserDto userId;
+    private PartnerDto partnerId;
+    private String status;
+    // Este es el campo que necesitas
  
     // Constructor
     public GuestDto() {}
@@ -17,12 +19,13 @@ public class GuestDto {
         this.id = id;
     }
  
-    public String getName() {
-        return name;
+    
+    public UserDto getUserId() {
+        return userId;
     }
- 
-    public void setName(String name) {
-        this.name = name;
+
+    public void setUserId(UserDto userId) {
+        this.userId = userId;
     }
 
     public PartnerDto getPartnerId() {
@@ -33,7 +36,13 @@ public class GuestDto {
         this.partnerId = partnerId;
     }  
 
-    public UserDto getUserId() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public String getStatus() {
+        return status;
     }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    
 }
