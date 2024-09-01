@@ -29,7 +29,7 @@ public class LoginController implements ControllerInterface {
         this.roles = new HashMap<String, ControllerInterface>();
         roles.put("admin", adminController);
         roles.put("Socio", partnerController);
-        roles.put("Invitado", partnerController);
+        roles.put("Invitado", guestController);
 
     }
 

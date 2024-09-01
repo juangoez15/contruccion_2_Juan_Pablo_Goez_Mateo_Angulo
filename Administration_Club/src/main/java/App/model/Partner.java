@@ -52,6 +52,10 @@ public class Partner {
     public void setUserId(User UserId) {
         this.UserId = UserId;
     }
+
+    public Person getPerson() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
     
 }
