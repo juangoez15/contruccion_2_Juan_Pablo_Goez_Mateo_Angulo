@@ -7,6 +7,7 @@
     import App.dao.interfaces.PartnerDao;
     import App.dao.interfaces.PersonDao;
     import App.dao.interfaces.UserDao;
+    import App.dto.DetalinvoiceDto;
     import App.dto.GuestDto;
     import App.dto.InvoiceDto;
     import App.dto.PartnerDto;
@@ -138,5 +139,10 @@
         public List<InvoiceDto> getClubInvoices() {
             throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         }
+
+    @Override
+    public void createInvoice(InvoiceDto invoiceDto, List<DetalinvoiceDto> detallesFactura) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
     }

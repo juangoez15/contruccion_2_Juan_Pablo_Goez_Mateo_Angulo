@@ -2,11 +2,14 @@ package App.controller;
 
 import App.controller.validator.PersonValidator;
 import App.controller.validator.UserValidator;
+import App.dto.DetalinvoiceDto;
 import App.dto.InvoiceDto;
 import App.dto.PartnerDto;
 import App.dto.PersonDto;
 import App.dto.UserDto;
 import App.service.interfaces.AdminService;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 import lombok.Getter;
@@ -211,8 +214,79 @@ public class AdminController implements ControllerInterface {
     }
 
     @Override
-    public void login() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void login() {
+        // Implementar la lógica de login o dejarlo como método vacío para evitar la excepción
+    }
+
+    public void facturacion(Scanner scanner) throws Exception {
+        System.out.println("Iniciando proceso de facturación...");
+
+        System.out.print("Ingrese el ID de la persona que realiza el consumo: ");
+        String personIdInput = scanner.nextLine();
+        long personId = Long.parseLong(personIdInput);
+
+        System.out.print("Ingrese el ID del socio que paga el consumo: ");
+        String partnerIdInput = scanner.nextLine();
+        long partnerId = Long.parseLong(partnerIdInput);
+
+        InvoiceDto invoiceDto = new InvoiceDto();
+        invoiceDto.setCreacionDate(new Date()); 
+        invoiceDto.setStatus(false); 
+
+        UserDto userDto = new UserDto();
+        userDto.setId(personId);  
+        invoiceDto.setUserId(userDto);
+
+        PartnerDto partnerDto = new PartnerDto();
+        partnerDto.setId(partnerId);  
+        invoiceDto.setPartnerId(partnerDto);
+
+        List<DetalinvoiceDto> detallesFactura = new ArrayList<>();
+        double totalFactura = 0.0;
+        boolean agregarMasItems = true;
+        int numeroItem = 1;
+
+        while (agregarMasItems) {
+            System.out.print("Ingrese el concepto del ítem consumido: ");
+            String concepto = scanner.nextLine();
+
+            System.out.print("Ingrese el valor del ítem: ");
+            String valorItemInput = scanner.nextLine();
+            double valorItem = Double.parseDouble(valorItemInput);
+
+            DetalinvoiceDto detalle = new DetalinvoiceDto();
+            detalle.setInvoiceid(invoiceDto); 
+            detalle.setItem(numeroItem);  
+            detalle.setDescription(concepto);  
+            detalle.setAmount(valorItem);  
+
+            detallesFactura.add(detalle);
+
+            totalFactura += valorItem;
+            numeroItem++;
+
+            System.out.print("¿Desea agregar otro ítem? (S/N): ");
+            String respuesta = scanner.nextLine();
+            if (respuesta.equalsIgnoreCase("N")) {
+                agregarMasItems = false;
+            }
+        }
+
+        invoiceDto.setTotalAmount(totalFactura);
+        System.out.println("Valor total de la factura: " + totalFactura);
+
+        System.out.print("¿Desea pagar la factura ahora? (S/N): ");
+        String respuestaPago = scanner.nextLine();
+        if (respuestaPago.equalsIgnoreCase("S")) {
+            invoiceDto.setStatus(true);
+            System.out.println("La factura ha sido pagada con éxito.");
+        } else {
+            System.out.println("La factura quedará como pendiente de pago.");
+        }
+
+        service.createInvoice(invoiceDto, detallesFactura);
+
+        System.out.println("Factura creada con éxito.");
     }
     
 }
