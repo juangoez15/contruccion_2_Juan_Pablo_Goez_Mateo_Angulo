@@ -38,6 +38,7 @@ public class PartnerDaoImplementation implements PartnerDao {
     public PartnerDto findByPartnerId(PartnerDto partnerDto) throws Exception {
 
        Partner partner = partnerRepository.findById(partnerDto.getId());
+       if (partner==null){return null;}
        return Helper.parse(partner); 
 
     }

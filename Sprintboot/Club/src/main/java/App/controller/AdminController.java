@@ -70,7 +70,7 @@ public class AdminController implements ControllerInterface {
                 return true;
             }
             case "2": {
-                this.viewClubInvoices(scanner);
+                this.facturacion(scanner);
                 return true;
             }
             case "3": {

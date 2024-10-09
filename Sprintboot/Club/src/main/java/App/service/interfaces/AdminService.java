@@ -24,4 +24,6 @@ public void createPartner(PartnerDto partnerDto) throws Exception;
 
 
 
+
+
 }
