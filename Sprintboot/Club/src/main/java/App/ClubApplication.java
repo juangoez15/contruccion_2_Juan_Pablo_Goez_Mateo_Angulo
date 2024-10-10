@@ -14,6 +14,7 @@ public class ClubApplication implements CommandLineRunner {
 
     @Autowired
     LoginController controller;
+    
 
     public static void main(String[] args) {
         SpringApplication.run(ClubApplication.class, args);

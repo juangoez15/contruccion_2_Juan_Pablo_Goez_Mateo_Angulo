@@ -1,5 +1,5 @@
 package App.dao.interfaces;
- 
+
 import App.config.MYSQLConnection;
 
 import java.sql.PreparedStatement;
@@ -13,9 +13,11 @@ import App.dto.GuestDto;
 import App.model.Partner;
 
 import App.Helper.Helper;
+import App.dao.interfaces.repository.GuestRepository;
 
 import App.dto.PersonDto;
 import App.dao.interfaces.repository.PartnerRepository;
+import App.model.Guest;
 
 import java.sql.Date;
 
@@ -29,101 +31,65 @@ import org.springframework.stereotype.Service;
 @Setter
 @NoArgsConstructor
 @Service
- 
+
 public class PartnerDaoImplementation implements PartnerDao {
-    
+
+    @Autowired
+    private GuestRepository guestRepository;
+
     @Autowired
     PartnerRepository partnerRepository;
- 
+
     public PartnerDto findByPartnerId(PartnerDto partnerDto) throws Exception {
 
-       Partner partner = partnerRepository.findById(partnerDto.getId());
-       if (partner==null){return null;}
-       return Helper.parse(partner); 
+        Partner partner = partnerRepository.findById(partnerDto.getId());
+        if (partner == null) {
+            return null;
+        }
+        return Helper.parse(partner);
 
     }
- 
+
     @Override
 
     public boolean existsByPersonId(PersonDto personDto) throws Exception {
 
         return partnerRepository.existsById(personDto.getId());
     }
- 
+
     @Override
-
-    public void createPartner(PartnerDto partnerDto) throws Exception { // este metodo de crear partner me pide crear un meto de createPartner en la interface PartnerRepository
-
-        Partner partner = Helper.parse(partnerDto);
-        partnerRepository.save(partner);
-
+    public void createPartner(PartnerDto partnerDto) throws Exception {
+        Partner partner = Helper.parse(partnerDto); // Conversión DTO a entidad
+        partnerRepository.save(partner); // No necesitas implementar nada más, JPA maneja el `save`
     }
- 
-    public void deletePartner(PartnerDto partnerDto) throws Exception { // este metodo de eliminar partner me pide crear un meto de deletePartner en la interface PartnerRepository
 
-        Partner partner = Helper.parse(partnerDto);
-        partnerRepository.delete(partner);
-
+    public void deletePartner(PartnerDto partnerDto) throws Exception {
+        Partner partner = Helper.parse(partnerDto); // Conversión DTO a entidad
+        partnerRepository.delete(partner); // Uso de `delete`
     }
- 
-    // Método para crear un invitado
 
     public void createGuest(GuestDto guestDto) throws Exception {
-
-        String query = "INSERT INTO GUEST(NAME, PARTNER_ID, ACTIVE) VALUES (?, ?, ?)";
-
-        PreparedStatement preparedStatement = MYSQLConnection.getConnection().prepareStatement(query);
-
-        preparedStatement.setString(1, guestDto.getName());
-
-        preparedStatement.setLong(2, guestDto.getPartnerId());
-
-        preparedStatement.setBoolean(3, true); // Los invitados son creados como activos por defecto
-
-        preparedStatement.execute();
-
-        preparedStatement.close();
-
+        Guest guest = Helper.parse(guestDto);
+        Partner partner = partnerRepository.findById(guestDto.getPartnerId().getId());
+        if (partner == null) {
+            throw new Exception("The associated partner does not exist.");
+        }
+        guest.setPartnerId(partner);
+        guest.setStatus(false);
+        guestRepository.save(guest);
     }
- 
+
     // Método para activar un invitado
-
-    public void activateGuest(long guestId) throws Exception {
-
+    public void setGuestStatus(long guestId, boolean isActive) throws Exception {
         String query = "UPDATE GUEST SET ACTIVE = ? WHERE ID = ?";
-
-        PreparedStatement preparedStatement = MYSQLConnection.getConnection().prepareStatement(query);
-
-        preparedStatement.setBoolean(1, true);
-
-        preparedStatement.setLong(2, guestId);
-
-        preparedStatement.executeUpdate();
-
-        preparedStatement.close();
-
+        try (PreparedStatement preparedStatement = MYSQLConnection.getConnection().prepareStatement(query)) {
+            preparedStatement.setBoolean(1, isActive);
+            preparedStatement.setLong(2, guestId);
+            preparedStatement.executeUpdate();
+        }
     }
- 
-    // Método para desactivar un invitado
 
-    public void deactivateGuest(long guestId) throws Exception {
-
-        String query = "UPDATE GUEST SET ACTIVE = ? WHERE ID = ?";
-
-        PreparedStatement preparedStatement = MYSQLConnection.getConnection().prepareStatement(query);
-
-        preparedStatement.setBoolean(1, false);
-
-        preparedStatement.setLong(2, guestId);
-
-        preparedStatement.executeUpdate();
-
-        preparedStatement.close();
-
-    }
- 
     // Método para incrementar fondos del socio
-
     public void addFunds(long partnerId, double amount) throws Exception {
 
         String query = "UPDATE PARTNER SET AMOUNT = AMOUNT + ? WHERE ID = ?";
@@ -139,9 +105,8 @@ public class PartnerDaoImplementation implements PartnerDao {
         preparedStatement.close();
 
     }
- 
-    // Método para registrar un consumo
 
+    // Método para registrar un consumo
     public void makeConsumption(long partnerId, double amount) throws Exception {
 
         String query = "UPDATE PARTNER SET AMOUNT = AMOUNT - ? WHERE ID = ?";
@@ -157,9 +122,8 @@ public class PartnerDaoImplementation implements PartnerDao {
         preparedStatement.close();
 
     }
- 
-    // Método para solicitar la baja del socio
 
+    // Método para solicitar la baja del socio
     public void requestDropout(long partnerId) throws Exception {
 
         String query = "UPDATE PARTNER SET STATUS = ? WHERE ID = ?";
@@ -177,5 +141,3 @@ public class PartnerDaoImplementation implements PartnerDao {
     }
 
 }
-
- 

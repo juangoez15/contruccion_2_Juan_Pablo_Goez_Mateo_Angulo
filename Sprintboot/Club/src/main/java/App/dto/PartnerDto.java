@@ -1,17 +1,18 @@
- package App.dto;
+package App.dto;
 
 import java.util.Date;
 
-
 public class PartnerDto {
+
     private long Id;
     private double amaunt;
     private boolean type;
     private Date creationdate;
     private UserDto UserId;
-    
-    public PartnerDto(){
-        
+    private PersonDto personId;
+
+    public PartnerDto() {
+
     }
 
     public long getId() {
@@ -54,21 +55,12 @@ public class PartnerDto {
         this.UserId = UserId;
     }
 
-    public long getIdentification_Card() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public String getName() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
     public PersonDto getPersonId() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return personId;
     }
 
-    public void setPersonId(PersonDto personDto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void setpersonId(PersonDto personId) {
+        this.personId = personId;
     }
-    
-    
+
 }

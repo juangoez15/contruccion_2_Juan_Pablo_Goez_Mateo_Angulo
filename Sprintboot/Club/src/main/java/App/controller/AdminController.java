@@ -117,7 +117,8 @@ public class AdminController implements ControllerInterface {
         PersonDto personDto = new PersonDto();
         personDto.setName(name);
         personDto.setDocument(Document);
-        personDto.setCelphone(3501235896L); // Assuming a default phone number
+        personDto.setCelphone(3501235896L);
+        // Assuming a default phone number
         UserDto userDto = new UserDto();
         userDto.setPersonId(personDto);
         userDto.setUsername(username);

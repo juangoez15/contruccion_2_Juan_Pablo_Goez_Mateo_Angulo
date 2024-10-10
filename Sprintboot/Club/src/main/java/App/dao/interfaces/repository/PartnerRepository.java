@@ -1,14 +1,14 @@
-
 package App.dao.interfaces.repository;
 
 import App.model.Partner;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface PartnerRepository extends JpaRepository<Partner,Long> {
+@Repository
+public interface PartnerRepository extends JpaRepository<Partner, Long> {
 
-    public Partner findById(long id);
+    // Agregar cualquier método adicional si es necesario
+    Partner findById(long id);
 
-    public boolean existsById(long id);
-
-    
+    void delete(Partner partner);
 }

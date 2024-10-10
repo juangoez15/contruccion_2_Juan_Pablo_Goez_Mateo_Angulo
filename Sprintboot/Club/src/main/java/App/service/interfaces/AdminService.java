@@ -4,7 +4,6 @@ package App.service.interfaces;
 import App.dto.DetalinvoiceDto;
 import App.dto.InvoiceDto;
 import App.dto.PartnerDto;
-import App.dto.UserDto;
 import java.util.List;
 
 public interface AdminService {

@@ -1,7 +1,7 @@
 package App.controller;
 
 import App.dto.PartnerDto;
-import App.service.PartnerService; // Asegúrate de tener una interfaz para los servicios de socio
+import App.service.interfaces.PartnerService;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 import lombok.Getter;
